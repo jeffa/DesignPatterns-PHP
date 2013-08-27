@@ -35,24 +35,22 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( $this->object->name, 'MyComposite' );
     }
 
-    function testSetGetChildren() {
-        $children = array( 'foo' => 'bar', 'baz' => 'qux' );
-        $this->object->children = $children;
-        $this->assertObjectHasAttribute( 'children', $this->object );
-        $this->assertSame( $children, $this->object->children );
+    function testAdd() {
+        $this->object->add( new MyComposite('inner') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->children['inner'] );
+        $this->assertEquals( $this->object->children['inner']->name, 'inner' );
     }
 
     function testGetChild() {
-        $children = array( 'foo' => 'bar', 'baz' => 'qux' );
-        $this->object->children = $children;
-        $this->assertEquals( $this->object->get_child('foo'), 'bar' );
-        $this->assertEquals( $this->object->get_child('baz'), 'qux' );
-    }
+        $this->object->add( new MyComposite('foo') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('foo') );
+        $this->assertEquals( $this->object->get_child('foo')->name, 'foo' );
 
-    function testAdd() {
-        $this->object->add( new MyComposite('pass') );
-        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('pass') );
-        $this->assertEquals( $this->object->get_child('pass')->name, 'pass' );
+        $this->object->add( new MyComposite('bar') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('bar') );
+        $this->assertEquals( $this->object->get_child('bar')->name, 'bar' );
+
+        $this->assertNull( $this->object->get_child('undef') );
     }
 
     /**
