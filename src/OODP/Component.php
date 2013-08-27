@@ -10,10 +10,18 @@ abstract class OODP_Component {
     public $parent;
     public $name;
 
-    abstract protected function add();
-    abstract protected function remove();
-    abstract protected function get_child();
+    abstract protected function add( $component );
+    abstract protected function remove( $name );
+    abstract protected function get_child( $name );
     abstract protected function is_composite();
+
+    public function __construct( $name ) {
+        $this->name = $name;
+    }
+
+    public function get_name() {
+        return $this->name;
+    }
 }
 
 

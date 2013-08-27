@@ -21,7 +21,11 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
     }
 
     function setUp() {
-        $this->object = new MyComposite();
+        $this->object = new MyComposite( 'MyComposite' );
+    }
+
+    function testGetName() {
+        $this->assertEquals( $this->object->get_name(), 'MyComposite' );
     }
 
     function testIsComposite() {

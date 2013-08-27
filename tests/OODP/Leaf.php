@@ -21,7 +21,11 @@ class OODP_LeafTest extends PHPUnit_Framework_TestCase {
     }
 
     function setUp() {
-        $this->object = new MyLeaf();
+        $this->object = new MyLeaf( 'MyLeaf' );
+    }
+
+    function testGetName() {
+        $this->assertEquals( $this->object->get_name(), 'MyLeaf' );
     }
 
     function testIsComposite() {
