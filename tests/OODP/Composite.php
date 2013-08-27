@@ -26,6 +26,10 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf( 'OODP_Component', $this->object );
     }
 
+    function testIsComposite() {
+        $this->assertEquals( $this->object->is_composite(), 1 );
+    }
+
     function testGetName() {
         $this->assertObjectHasAttribute( 'name', $this->object );
         $this->assertEquals( $this->object->name, 'MyComposite' );
@@ -33,20 +37,31 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
 
     function testSetGetChildren() {
         $children = array( 'foo' => 'bar', 'baz' => 'qux' );
-        $this->assertObjectHasAttribute( 'children', $this->object );
         $this->object->children = $children;
+        $this->assertObjectHasAttribute( 'children', $this->object );
         $this->assertSame( $children, $this->object->children );
     }
 
     function testGetChild() {
         $children = array( 'foo' => 'bar', 'baz' => 'qux' );
         $this->object->children = $children;
-        $this->assertEquals( $this->object->get_child( 'foo' ), 'bar' );
-        $this->assertEquals( $this->object->get_child( 'baz' ), 'qux' );
+        $this->assertEquals( $this->object->get_child('foo'), 'bar' );
+        $this->assertEquals( $this->object->get_child('baz'), 'qux' );
     }
 
-    function testIsComposite() {
-        $this->assertEquals( $this->object->is_composite(), 1 );
+    function testAdd() {
+        $this->object->add( new MyComposite('pass') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('pass') );
+        $this->assertEquals( $this->object->get_child('pass')->name, 'pass' );
+    }
+
+    /**
+     * @expectedException CollisionException
+     * @expectedExceptionMessage Name Exists: some_name
+     */
+    function testCollisionException() {
+        $this->object->add( new MyComposite('some_name') );
+        $this->object->add( new MyComposite('some_name') );
     }
 }
 

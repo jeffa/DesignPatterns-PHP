@@ -11,6 +11,12 @@ abstract class OODP_Composite extends OODP_Component {
     public $children;
 
     public function add( $component ) {
+
+        if ($this->get_child( $component->name )) {
+            throw new CollisionException( 'Name Exists: ' . $component->name );
+        }
+
+        $this->children[ $component->name ] = $component;
     }
 
     public function remove( $name ) {
@@ -22,6 +28,12 @@ abstract class OODP_Composite extends OODP_Component {
 
     public function is_composite()  {
         return 1;
+    }
+}
+
+class CollisionException extends Exception {
+    public function __toString() {
+        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }
 }
 
