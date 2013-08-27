@@ -6,7 +6,6 @@
  */
 abstract class OODP_Component {
 
-    public $children;
     public $parent;
     public $name;
 
@@ -17,10 +16,6 @@ abstract class OODP_Component {
 
     public function __construct( $name ) {
         $this->name = $name;
-    }
-
-    public function get_name() {
-        return $this->name;
     }
 }
 

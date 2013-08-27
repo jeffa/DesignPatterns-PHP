@@ -28,7 +28,14 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
 
     function testGetName() {
         $this->assertObjectHasAttribute( 'name', $this->object );
-        $this->assertEquals( $this->object->get_name(), 'MyComposite' );
+        $this->assertEquals( $this->object->name, 'MyComposite' );
+    }
+
+    function testSetGetChildren() {
+        $children = array( 'foo', 'bar', 'baz', 'qux' );
+        $this->assertObjectHasAttribute( 'children', $this->object );
+        $this->object->children = $children;
+        $this->assertSame( $children, $this->object->children );
     }
 
     function testIsComposite() {

@@ -8,6 +8,8 @@ require_once( 'Component.php' );
 
 abstract class OODP_Composite extends OODP_Component {
 
+    public $children;
+
     public function add( $component ) {
     }
 
@@ -17,7 +19,9 @@ abstract class OODP_Composite extends OODP_Component {
     public function get_child( $name ) {
     }
 
-    public function is_composite()  { return 1; }
+    public function is_composite()  {
+        return 1;
+    }
 }
 
 

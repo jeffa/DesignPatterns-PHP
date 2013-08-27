@@ -28,7 +28,7 @@ class OODP_LeafTest extends PHPUnit_Framework_TestCase {
 
     function testGetName() {
         $this->assertObjectHasAttribute( 'name', $this->object );
-        $this->assertEquals( $this->object->get_name(), 'MyLeaf' );
+        $this->assertEquals( $this->object->name, 'MyLeaf' );
     }
 
     function testIsComposite() {
