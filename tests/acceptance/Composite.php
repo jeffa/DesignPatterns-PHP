@@ -53,6 +53,18 @@ class Acceptance_CompositeTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( $this->tv->net_price, 400 );
         $this->assertEquals( $this->tv->discount_price, 250 );
     }
+
+    function testMethods() {
+        $this->cabinet->add( $this->tv );
+        $this->assertEquals( $this->cabinet->get_child('Toshiba')->name, 'Toshiba' );
+
+        $this->cabinet->add( $this->console );
+        $this->assertEquals( $this->cabinet->get_child('PS3')->name, 'PS3' );
+        $this->assertEquals( $this->cabinet->get_total_net_price(), 1050 );
+
+        $this->cabinet->remove('PS3');
+        $this->assertEquals( $this->cabinet->get_total_net_price(), 450 );
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Acceptance_CompositeTest::main') {

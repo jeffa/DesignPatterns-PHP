@@ -19,6 +19,14 @@ abstract class Chassis extends OODP_Composite {
         $this->discount_price = $discount_price;
     }
 
+    public function get_total_net_price() {
+        $total = $this->net_price;
+        foreach ($this->children as $child) {
+            $total += $child->net_price; 
+        }
+        return $total;
+    }
+
 }
 
 
