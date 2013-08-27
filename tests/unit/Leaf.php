@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Numbers_Words_BulgarianTest::main');
+    define('PHPUnit_MAIN_METHOD', 'OODP_LeafTest::main');
 }
 
 require_once( 'PHPUnit/Autoload.php' );

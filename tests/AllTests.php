@@ -6,8 +6,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once( 'PHPUnit/Autoload.php' );
 
 // these are the test classes, not the actual classes
-require_once( 'OODP/Leaf.php' );
-require_once( 'OODP/Composite.php' );
+require_once( 'unit/Leaf.php' );
+require_once( 'unit/Composite.php' );
+require_once( 'acceptance/Composite.php' );
 
 class OODP_AllTests {
 
@@ -20,6 +21,7 @@ class OODP_AllTests {
 
         $suite->addTestSuite( 'OODP_LeafTest' );
         $suite->addTestSuite( 'OODP_CompositeTest' );
+        $suite->addTestSuite( 'Acceptance_CompositeTest' );
 
         return $suite;
     }
