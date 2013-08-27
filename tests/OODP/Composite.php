@@ -32,10 +32,17 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
     }
 
     function testSetGetChildren() {
-        $children = array( 'foo', 'bar', 'baz', 'qux' );
+        $children = array( 'foo' => 'bar', 'baz' => 'qux' );
         $this->assertObjectHasAttribute( 'children', $this->object );
         $this->object->children = $children;
         $this->assertSame( $children, $this->object->children );
+    }
+
+    function testGetChild() {
+        $children = array( 'foo' => 'bar', 'baz' => 'qux' );
+        $this->object->children = $children;
+        $this->assertEquals( $this->object->get_child( 'foo' ), 'bar' );
+        $this->assertEquals( $this->object->get_child( 'baz' ), 'qux' );
     }
 
     function testIsComposite() {

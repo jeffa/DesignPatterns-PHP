@@ -17,6 +17,7 @@ abstract class OODP_Composite extends OODP_Component {
     }
 
     public function get_child( $name ) {
+        return $this->children[ $name ];
     }
 
     public function is_composite()  {
