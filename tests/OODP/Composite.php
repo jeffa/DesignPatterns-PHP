@@ -41,18 +41,6 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( $this->object->children['inner']->name, 'inner' );
     }
 
-    function testGetChild() {
-        $this->object->add( new MyComposite('foo') );
-        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('foo') );
-        $this->assertEquals( $this->object->get_child('foo')->name, 'foo' );
-
-        $this->object->add( new MyComposite('bar') );
-        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('bar') );
-        $this->assertEquals( $this->object->get_child('bar')->name, 'bar' );
-
-        $this->assertNull( $this->object->get_child('undef') );
-    }
-
     /**
      * @expectedException CollisionException
      * @expectedExceptionMessage Name Exists: some_name
@@ -60,6 +48,28 @@ class OODP_CompositeTest extends PHPUnit_Framework_TestCase {
     function testCollisionException() {
         $this->object->add( new MyComposite('some_name') );
         $this->object->add( new MyComposite('some_name') );
+    }
+
+    function testGetChild() {
+        $this->assertNull( $this->object->get_child('foo') );
+        $this->object->add( new MyComposite('foo') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('foo') );
+        $this->assertEquals( $this->object->get_child('foo')->name, 'foo' );
+
+        $this->assertNull( $this->object->get_child('bar') );
+        $this->object->add( new MyComposite('bar') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('bar') );
+        $this->assertEquals( $this->object->get_child('bar')->name, 'bar' );
+    }
+
+    function testRemove() {
+        $this->assertNull( $this->object->get_child('delete_me') );
+        $this->object->add( new MyComposite('delete_me') );
+        $this->assertInstanceOf( 'MyComposite', $this->object->get_child('delete_me') );
+        $this->assertEquals( $this->object->get_child('delete_me')->name, 'delete_me' );
+
+        $this->object->remove('delete_me');
+        $this->assertNull( $this->object->get_child('delete_me') );
     }
 }
 

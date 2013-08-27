@@ -20,6 +20,9 @@ abstract class OODP_Composite extends OODP_Component {
     }
 
     public function remove( $name ) {
+        if (isset( $this->children[ $name ] )) {
+            unset( $this->children[ $name ] );
+        }
     }
 
     public function get_child( $name ) {
