@@ -22,9 +22,12 @@ class OODP_LeafTest extends PHPUnit_Framework_TestCase {
 
     function setUp() {
         $this->object = new MyLeaf( 'MyLeaf' );
+        $this->assertInstanceOf( 'OODP_Leaf', $this->object );
+        $this->assertInstanceOf( 'OODP_Component', $this->object );
     }
 
     function testGetName() {
+        $this->assertObjectHasAttribute( 'name', $this->object );
         $this->assertEquals( $this->object->get_name(), 'MyLeaf' );
     }
 
